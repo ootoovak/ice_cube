@@ -1,7 +1,3 @@
----
-title: seejohnrun/ice_cube @ GitHub
----
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -9,7 +5,7 @@ title: seejohnrun/ice_cube @ GitHub
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>seejohnrun/ice_cube @ GitHub</title>
+	<title>{{ page.title }}</title>
 	
 	<link href='css/syntax.css' rel='stylesheet' type='text/css'>
 	<style type="text/css">
@@ -27,7 +23,7 @@ title: seejohnrun/ice_cube @ GitHub
 		h1 .small { font-size: 0.4em; }
 		h1 a { text-decoration: none }
 		h2 { font-size: 1.5em; color: #150b0a; }
-    h3 { text-align: center; color: #150b0a; }
+    h3 { font-size: 1.2em; color: #150b0a; }
     a { color: #150b0a; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
@@ -57,42 +53,9 @@ title: seejohnrun/ice_cube @ GitHub
       Ruby Date Recurrence Library - Fast querying and expansion of recurrence rules
     </div>
 
-    <h2>Example</h2>
-    <p>
-      {% highlight ruby %}
-      # The next 5 fridays in October that is the 13th of the month
-      schedule = IceCube::Schedule.new(Time.now)
-      schedule.add_recurrence_rule Rule.weekly.day(:friday).day_of_month(13).month_of_year(:october)
-      schedule.first(5)
-      {% endhighlight %}
-      
-      <em>
-        Fri Oct 13 13:55:59 -0400 2017<br>
-        Fri Oct 13 13:55:59 -0400 2023<br>
-        Fri Oct 13 13:55:59 -0400 2028<br>
-        Fri Oct 13 13:55:59 -0400 2034<br> 
-        Fri Oct 13 13:55:59 -0500 2045<br>
-      </em>
-    </p>  
-    
-    <h2>Install</h2>
-    <p>
-      <pre>$ gem install ice_cube</pre>
-    </p>
+    {{ content }}
 
-    <h2>Contributors</h2>
-    <p>
-      <li>John Crepezzi</li>
-      <li>Mat Brown</li>
-    </p>
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/seejohnrun/ice_cube/zipball/master">zip</a> /
-      <a href="http://github.com/seejohnrun/ice_cube/tarball/master">tar</a> formats, or ..
-      <pre>$ git clone git://github.com/seejohnrun/ice_cube</pre>
-    </p>
+    <hr>
 
     <h2>License</h2>
     <p>
@@ -107,10 +70,6 @@ title: seejohnrun/ice_cube @ GitHub
       THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       </em>
     </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/seejohnrun/ice_cube">seejohnrun/ice_cube</a>
-    </div>
 
   </div>
 
