@@ -4,7 +4,6 @@
 # A complex rule
 rule = IceCube::Rule.daily.day_of_week(:monday => [1, -1]).month_of_year(:april)
 
-# Various ways to view the rule
 rule.to_s # Daily in April on the last and 1st Mondays
 rule.to_ical # FREQ=DAILY;BYMONTH=4;BYDAY=-1MO,1MO
 rule.to_yaml # --- &id003 !ruby/object:IceCube::DailyRule ...

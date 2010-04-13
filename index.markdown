@@ -6,6 +6,8 @@ tagline: Fast querying and expansion of recurrence rules in Ruby
 
 {% include get_ice_cube.markdown %}
 
+-----
+
 {% include friday.markdown %}
 
 -----
