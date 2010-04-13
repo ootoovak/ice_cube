@@ -52,17 +52,38 @@
       Ruby Date Recurrence Library - Fast querying and expansion of recurrence rules
     </div>
 
+    <h2>Example</h2>
+    <p>
+      {% highlight ruby %}
+      # The next 5 fridays in October that is the 13th of the month
+      schedule = IceCube::Schedule.new(Time.now)
+      schedule.add_recurrence_rule Rule.weekly.day(:friday).day_of_month(13).month_of_year(:october)
+      schedule.first(5)
+      {% endhighlight %}
+      
+      Fri Oct 13 13:55:59 -0400 2017
+      Fri Oct 13 13:55:59 -0400 2023 
+      Fri Oct 13 13:55:59 -0400 2028 
+      Fri Oct 13 13:55:59 -0400 2034 
+      Fri Oct 13 13:55:59 -0500 2045
+    </p>  
+    
     <h2>Install</h2>
-    <p>gem install ice_cube</p>
+    <p>
+      <pre>$ gem install ice_cube</pre>
+    </p>
 
     <h2>Contributors</h2>
-    <p>John Crepezzi<br>Mat Brown</p>
+    <p>
+      <li>John Crepezzi</li>
+      <li>Mat Brown</li>
+    </p>
 
     <h2>Download</h2>
     <p>
       You can download this project in either
       <a href="http://github.com/seejohnrun/ice_cube/zipball/master">zip</a> /
-      <a href="http://github.com/seejohnrun/ice_cube/tarball/master">tar</a> formats, or ...
+      <a href="http://github.com/seejohnrun/ice_cube/tarball/master">tar</a> formats, or ..
       <pre>$ git clone git://github.com/seejohnrun/ice_cube</pre>
     </p>
 
