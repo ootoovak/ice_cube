@@ -11,7 +11,7 @@ schedule.occurs_at?(Time.local(2010, 11, 1)) # false
 # Does it occur on a certain date?
 schedule.occurs_on?(Date.today)
 
-# All of the occurrences between two dates
+# All of the occurrences between two Times
 schedule.occurrences_between(Time.local(2010, 1, 1), Time.local(2010, 12, 1))
 
 # When are the first 10 occurrences
