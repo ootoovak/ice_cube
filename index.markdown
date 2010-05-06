@@ -12,6 +12,10 @@ tagline: Fast querying and expansion of recurrence rules in Ruby
 
 -----
 
+{% include persistence.markdown %}
+
+-----
+
 {% include stringrepresentations.markdown %}
 
 -----
