@@ -25,4 +25,8 @@ ten = Time.new(2010, 5, 6, 10, 0, 0)
 schedule = Schedule.new(ten, :duration => 3600)
 schedule.add_recurrence_rule Rule.daily
 schedule.occurring_at?(Time.local(2010, 5, 6, 10, 30, 0)) # true
+
+# If your schedule needs a hard-set end time, that's easy too
+schedule = Schedule.new(Time.now, :end_time => Time.now + 3600)
+schedule.occurs_at?(Time.now + 3601) # false
 {% endhighlight %}
