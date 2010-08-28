@@ -30,3 +30,4 @@ tagline: Fast querying and expansion of recurrence rules in Ruby
 
 ###Reference
 * [Introduction Slides](http://seejohnrun.github.com/ice_cube/static/ice_cube_ruby_nyc.pdf)
+* [Lone Star Ruby Conference Slides](http://seejohnrun.github.com/ice_cube/static/lsrc_ice_cube.pdf)
