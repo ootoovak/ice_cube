@@ -251,6 +251,13 @@ module IceCube
       pieces.join("\n")
     end
 
+    # Load the schedule from an ical string
+    def self.from_ical(ical_str)
+      schedule = self.new
+      ical_str.split(/\n/).each do |line|
+      end
+    end
+
     # Convert the schedule to yaml
     def to_yaml(*args)
       defined?(Psych) ? Psych::dump(to_hash, *args) : YAML::dump(to_hash, *args)
