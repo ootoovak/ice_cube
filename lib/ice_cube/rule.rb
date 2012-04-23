@@ -44,16 +44,25 @@ module IceCube
     end
 
     # Convert from a hash and create a rule
-    def self.from_hash(hash)
+    def self.from_hash(hash, before_utc = false)
       return nil unless match = hash[:rule_type].match(/\:\:(.+?)Rule/)
+
       rule = IceCube::Rule.send(match[1].downcase.to_sym, hash[:interval] || 1)
       rule.until(TimeUtil.deserialize_time(hash[:until])) if hash[:until]
       rule.count(hash[:count]) if hash[:count]
+
       hash[:validations] && hash[:validations].each do |key, value|
+        if before_utc && (key == :day)
+          value.map! { |v| (v + 1) % 7 }
+        elsif before_utc && (key == :day_of_week)
+          value = value.inject({}) { |nv, (k, v)| nv[(k + 1) % 7] = v; nv }
+        end
+
         key = key.to_sym unless key.is_a?(Symbol)
         value.is_a?(Array) ? rule.send(key, *value) : rule.send(key, value)
       end
-      rule
+
+      return rule
     end
 
     # Reset the uses on the rule to 0

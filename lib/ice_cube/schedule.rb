@@ -272,44 +272,41 @@ module IceCube
 
     # Convert the schedule to a hash
     def to_hash
+      before_utc = (start_time.utc_offset > 0)
+
       data = {}
-      data[:start_date] = TimeUtil.serialize_time(start_time)
-      data[:end_time] = end_time if end_time
+
+      data[:start_date] = start_time.utc
+      data[:end_time] = end_time.utc if end_time
       data[:duration] = duration if duration
-      data[:rrules] = recurrence_rules.map(&:to_hash)
-      data[:exrules] = exception_rules.map(&:to_hash)
-      data[:rtimes] = recurrence_times.map do |rt|
-        TimeUtil.serialize_time(rt)
-      end
-      data[:extimes] = exception_times.map do |et|
-        TimeUtil.serialize_time(et)
-      end
-      data
+
+      data[:rrules] = recurrence_rules.map { |rr| rr.to_hash(before_utc) }
+      data[:exrules] = exception_rules.map { |er| er.to_hash(before_utc) }
+
+      data[:rtimes] = recurrence_times.map { |rt| rt.utc }
+      data[:extimes] = exception_times.map { |et| et.utc }
+
+      return data
     end
 
     # Load the schedule from a hash
     def self.from_hash(data, options = {})
+      before_utc = (Time.zone.utc_offset > 0)
+
       data[:start_date] = options[:start_date_override] if options[:start_date_override]
+
       # And then deserialize
-      schedule = IceCube::Schedule.new TimeUtil.deserialize_time(data[:start_date])
+      schedule = Bucky::Schedule.new(data[:start_date].in_time_zone(Time.zone))
+      schedule.end_time = data[:end_time].in_time_zone(Time.zone) if data[:end_time]
       schedule.duration = data[:duration] if data[:duration]
-      schedule.end_time = TimeUtil.deserialize_time(data[:end_time]) if data[:end_time]
-      data[:rrules] && data[:rrules].each { |h| schedule.rrule(IceCube::Rule.from_hash(h)) }  
-      data[:exrules] && data[:exrules].each { |h| schedule.exrule(IceCube::Rule.from_hash(h)) }
-      data[:rtimes] && data[:rtimes].each do |t|
-        schedule.add_recurrence_time TimeUtil.deserialize_time(t)
-      end
-      data[:extimes] && data[:extimes].each do |t|
-        schedule.add_exception_time TimeUtil.deserialize_time(t)
-      end
-      # Also serialize old format for backward compat
-      data[:rdates] && data[:rdates].each do |t|
-        schedule.add_recurrence_time TimeUtil.deserialize_time(t)
-      end
-      data[:exdates] && data[:exdates].each do |t|
-        schedule.add_exception_time TimeUtil.deserialize_time(t)
-      end
-      schedule
+
+      data[:rrules] && data[:rrules].each   { |h| schedule.rrule(IceCube::Rule.from_hash(h, before_utc)) }
+      data[:exrules] && data[:exrules].each { |h| schedule.exrule(IceCube::Rule.from_hash(h, before_utc)) }
+
+      data[:rtimes] && data[:rtimes].each   { |t| schedule.add_recurrence_time(t.in_time_zone(Time.zone)) }
+      data[:extimes] && data[:extimes].each { |t| schedule.add_exception_time(t.in_time_zone(Time.zone)) }
+
+      return schedule
     end
 
     # Determine if the schedule will end

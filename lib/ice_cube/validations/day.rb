@@ -28,8 +28,9 @@ module IceCube
         builder.piece(:day) << day
       end
 
-      def build_hash(builder)
-        builder.validations_array(:day) << day
+      def build_hash(builder, before_utc = false)
+        hash_day = (before_utc ? (day - 1) % 7 : day)
+        builder.validations_array(:day) << hash_day
       end
 
       def build_ical(builder)

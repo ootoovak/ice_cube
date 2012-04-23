@@ -36,9 +36,10 @@ module IceCube
         builder['BYDAY'] << "#{occ}#{ical_day}"
       end
 
-      def build_hash(builder)
+      def build_hash(builder, before_utc = false)
+        hash_day = (before_utc ? (day - 1) % 7 : day)
         builder.validations[:day_of_week] ||= {}
-        arr = (builder.validations[:day_of_week][day] ||= [])
+        arr = (builder.validations[:day_of_week][hash_day] ||= [])
         arr << occ
       end
 

@@ -65,14 +65,20 @@ module IceCube
       builder.to_s
     end
 
-    def to_hash
+    def to_hash(before_utc = false)
       builder = HashBuilder.new(self)
+
       @validations.each do |name, validations|
         validations.each do |validation|
-          validation.build_hash(builder)
+          if validation.is_a?(Validations::Day::Validation) || validation.is_a?(Validations::DayOfWeek::Validation)
+            validation.build_hash(builder, before_utc)
+          else
+            validation.build_hash(builder)
+          end
         end
       end
-      builder.to_hash
+
+      return builder.to_hash
     end
 
     def to_ical
