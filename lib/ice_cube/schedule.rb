@@ -296,7 +296,7 @@ module IceCube
       data[:start_date] = options[:start_date_override] if options[:start_date_override]
 
       # And then deserialize
-      schedule = Bucky::Schedule.new(data[:start_date].in_time_zone(Time.zone))
+      schedule = self.new(data[:start_date].in_time_zone(Time.zone))
       schedule.end_time = data[:end_time].in_time_zone(Time.zone) if data[:end_time]
       schedule.duration = data[:duration] if data[:duration]
 
