@@ -52,8 +52,9 @@ module IceCube
       rule.count(hash[:count]) if hash[:count]
 
       hash[:validations] && hash[:validations].each do |key, value|
+        # Convert the days back into current timezone as needed
         if before_utc && (key == :day)
-          value.map! { |v| (v + 1) % 7 }
+          value = value.map { |v| (v + 1) % 7 }
         elsif before_utc && (key == :day_of_week)
           value = value.inject({}) { |nv, (k, v)| nv[(k + 1) % 7] = v; nv }
         end

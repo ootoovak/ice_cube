@@ -70,6 +70,7 @@ module IceCube
 
       @validations.each do |name, validations|
         validations.each do |validation|
+          # Check if they are day type validations because they will have ot be adjusted to the UTC time zone
           if validation.is_a?(Validations::Day::Validation) || validation.is_a?(Validations::DayOfWeek::Validation)
             validation.build_hash(builder, before_utc)
           else
