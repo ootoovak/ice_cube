@@ -272,7 +272,7 @@ module IceCube
 
     # Convert the schedule to a hash
     def to_hash
-      before_utc = (start_time.utc_offset > 0)
+      before_utc = (Time.zone.utc_offset > 0)
 
       data = {}
 
